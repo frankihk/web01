@@ -1,18 +1,30 @@
 import { compareAsc, format } from "date-fns";
+import express from "express";
+import path from "path";
+app.use('/assets',express.static(__dirname + '/assets'));
 
-format(new Date(2014, 1, 11), "yyyy-MM-dd");
-//=> '2014-02-11'
+//for /index page
+app.get('/', function(request,response){
+	response.sendFile('index.html',{root:path.join(__dirname,'./views')});
+});
 
-const dates = [
-  new Date(1995, 6, 2),
-  new Date(1987, 1, 11),
-  new Date(1989, 6, 10),
-  
-];
-console.log(dates.sort(compareAsc));
+//for /home page
+app.get('/home', function(request,response){
+	response.sendFile('home.html',{root:path.join(__dirname,'./views')});
+});
 
-//=> [
-//   Wed Feb 11 1987 00:00:00,
-//   Mon Jul 10 1989 00:00:00,
-//   Sun Jul 02 1995 00:00:00
-// ]
+//for /about page
+app.get('/about', function(request,response){
+	response.sendFile('about.html',{root:path.join(__dirname,'./views')});
+});
+
+//for /contact page
+app.get('/contact', function(request,response){
+	response.sendFile('contact.html',{root:path.join(__dirname,'./views')});
+});
+
+app.listen(3000,function(){
+	console.log('Listening at port 3000...');
+});
+
+module.exports = app;
