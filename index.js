@@ -1,6 +1,7 @@
 import { compareAsc, format } from "date-fns";
 import express from "express";
 import path from "path";
+let app = express;
 app.use('/assets',express.static(__dirname + '/assets'));
 
 //for /index page
